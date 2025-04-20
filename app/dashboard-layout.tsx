@@ -10,15 +10,14 @@ import {
   Globe,
   Settings,
   Shield,
-  Terminal,
   Code,
   BarChart2,
   TrendingUp,
   Bot,
   LayoutDashboard,
   LineChart,
-  Zap,
   Brain,
+  AlertTriangle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -68,23 +67,19 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     router.push(path)
   }
 
-  // Update the navigation items to include Advanced instead of Wallet
+  // Update the navigation items to replace Advanced with Danger
   const navigationItems = [
     { name: "Dashboard", path: "/", icon: <LayoutDashboard className="h-5 w-5" /> },
     { name: "Trading Scripts", path: "/trading-scripts", icon: <Code className="h-5 w-5" /> },
     { name: "Market Data", path: "/market-data", icon: <LineChart className="h-5 w-5" /> },
-    { name: "Advanced", path: "/advanced", icon: <Zap className="h-5 w-5" /> },
+    { name: "Danger", path: "/danger", icon: <AlertTriangle className="h-5 w-5" /> },
     { name: "Agent", path: "/agent", icon: <Bot className="h-5 w-5" /> },
     { name: "AI Analysis", path: "/ai-analysis", icon: <Brain className="h-5 w-5" /> },
   ]
 
   // Make sure the isActive function works with the new path
   const isActive = (path: string) => {
-    return (
-      pathname === path ||
-      (path !== "/" && pathname.startsWith(path)) ||
-      (path === "/advanced" && pathname.startsWith("/advanced"))
-    )
+    return pathname === path || (path !== "/" && pathname.startsWith(path))
   }
 
   return (
@@ -165,10 +160,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 onClick={() => handleNavigation("/security")}
               />
               <NavItem
-                icon={Terminal}
-                label="Advanced"
-                active={isActive("/advanced")}
-                onClick={() => handleNavigation("/advanced")}
+                icon={AlertTriangle}
+                label="Danger"
+                active={isActive("/danger")}
+                onClick={() => handleNavigation("/danger")}
               />
               <NavItem
                 icon={Settings}
