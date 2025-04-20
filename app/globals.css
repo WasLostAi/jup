@@ -1,0 +1,530 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 192 100% 45%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 174 65% 50%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 174 65% 50%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 192 100% 45%;
+
+    --radius: 0.5rem;
+
+    /* Price display colors */
+    --price-up: #00ff41; /* Bright matrix green */
+    --price-down: #ff3b30;
+    --price-neutral: #e8f9ff;
+    --price-main: #c7f284;
+  }
+
+  .dark {
+    --background: 240 3% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 3% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 3% 5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 192 100% 45%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 174 65% 50%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 174 65% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 3% 15%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 192 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-syne), sans-serif;
+    color: #e8f9ff; /* Jupiter cloud color */
+  }
+  h1 {
+    @apply font-extrabold;
+  }
+  h2 {
+    @apply font-extrabold;
+  }
+  h3 {
+    @apply font-bold;
+  }
+
+  /* Ensure buttons have proper text contrast */
+  button {
+    color: #e8f9ff; /* Jupiter cloud color */
+  }
+
+  /* Ensure buttons with gradients have dark text */
+  button.bg-gradient-jupiter-1,
+  button.bg-gradient-jupiter-2,
+  button.bg-gradient-jupiter-3 {
+    color: #0c0c0c; /* Jupiter spaceBlack color */
+    @apply font-medium;
+  }
+}
+
+/* Override shadcn button hover states to prevent white backgrounds */
+.dark .button,
+.dark .button:hover,
+.dark [data-theme="dark"] .button,
+.dark [data-theme="dark"] .button:hover,
+.dark .btn,
+.dark .btn:hover {
+  background-color: #151514; /* jupiter-meteorite */
+  color: #e8f9ff; /* Jupiter cloud color */
+}
+.dark .button:hover,
+.dark [data-theme="dark"] .button:hover,
+.dark .btn:hover {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+}
+
+/* Override specific button variants */
+.dark .button[data-variant="default"],
+.dark .button[data-variant="default"]:hover,
+.dark [data-theme="dark"] .button[data-variant="default"],
+.dark [data-theme="dark"] .button[data-variant="default"]:hover {
+  background-color: #151514; /* jupiter-meteorite */
+}
+.dark .button[data-variant="default"]:hover,
+.dark [data-theme="dark"] .button[data-variant="default"]:hover {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+}
+
+.dark .button[data-variant="ghost"],
+.dark .button[data-variant="ghost"]:hover,
+.dark [data-theme="dark"] .button[data-variant="ghost"],
+.dark [data-theme="dark"] .button[data-variant="ghost"]:hover {
+  background-color: transparent;
+}
+.dark .button[data-variant="ghost"]:hover,
+.dark [data-theme="dark"] .button[data-variant="ghost"]:hover {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+}
+
+.dark .button[data-variant="outline"],
+.dark .button[data-variant="outline"]:hover,
+.dark [data-theme="dark"] .button[data-variant="outline"],
+.dark [data-theme="dark"] .button[data-variant="outline"]:hover {
+  background-color: transparent;
+  border-color: #30302e; /* jupiter-gunmetal */
+}
+.dark .button[data-variant="outline"]:hover,
+.dark [data-theme="dark"] .button[data-variant="outline"]:hover {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+}
+
+/* Override shadcn UI components that might have white hover states */
+.dark [role="button"]:hover,
+.dark [role="tab"]:hover,
+.dark [role="menuitem"]:hover {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+  color: #e8f9ff; /* Jupiter cloud color */
+}
+
+.matrix-rain-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  width: 20px;
+  color: rgba(0, 182, 231, 0.8); /* Jupiter Nebula Blue */
+  font-family: monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  animation: matrix-rain linear infinite;
+}
+
+.matrix-column span {
+  float: left;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(0);
+  animation: matrix-rain-drop 1.5s linear infinite;
+  background: linear-gradient(180deg, #00b6e7, #22ccee, #2ed3b7, #76d484, #94e5a0, #a4d756, #c7f284);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes matrix-rain-drop {
+  0% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+  80% {
+    opacity: 0.7;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Price update animation */
+@keyframes price-pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes price-fade {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.price-update {
+  animation: price-pulse 0.5s ease-in-out;
+}
+
+.price-up {
+  color: var(--price-up);
+}
+
+.price-down {
+  color: var(--price-down);
+}
+
+.price-neutral {
+  color: var(--price-neutral);
+}
+
+.price-blink {
+  animation: price-fade 2s infinite;
+}
+
+.price-font {
+  font-family: var(--font-jetbrains), monospace;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #00b6e7, #a4d756);
+}
+
+.gradient-text-2 {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #22ccee, #2ed3b7);
+}
+
+.gradient-text-3 {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #2ed3b7, #c8f284);
+}
+
+/* Jupiter custom classes */
+.jupiter-card {
+  background-color: rgba(21, 21, 20, 0.8); /* jupiter-meteorite with opacity */
+  border-color: rgba(29, 29, 28, 0.5); /* jupiter-charcoal with opacity */
+  backdrop-filter: blur(4px);
+}
+
+.jupiter-button {
+  background-image: linear-gradient(to right, #00b6e7, #a4d756);
+  transition: all 0.3s;
+  color: #0c0c0c; /* Jupiter spaceBlack color */
+  font-weight: 500;
+}
+.jupiter-button:hover {
+  background-image: linear-gradient(to right, #22ccee, #2ed3b7);
+}
+
+.jupiter-button-secondary {
+  background-color: #1d1d1c; /* jupiter-charcoal */
+  transition: all 0.3s;
+  color: #e8f9ff; /* Jupiter cloud color */
+}
+.jupiter-button-secondary:hover {
+  background-color: #30302e; /* jupiter-gunmetal */
+  color: #00b6e7; /* Jupiter nebula-blue color */
+}
+
+/* Hide scrollbars but maintain scroll functionality */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbars for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure elements with overflow still scroll */
+.overflow-auto,
+.overflow-y-auto,
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Additional Jupiter-specific utility classes */
+.bg-jupiter-meteorite {
+  background-color: #151514 !important;
+}
+
+.bg-jupiter-meteorite-80 {
+  background-color: rgba(21, 21, 20, 0.8) !important;
+}
+
+.bg-jupiter-charcoal {
+  background-color: #1d1d1c !important;
+}
+
+.bg-jupiter-gunmetal {
+  background-color: #30302e !important;
+}
+
+.bg-jupiter-space-black {
+  background-color: #0c0c0c !important;
+}
+
+.border-jupiter-charcoal {
+  border-color: #1d1d1c !important;
+}
+
+.border-jupiter-gunmetal {
+  border-color: #30302e !important;
+}
+
+.text-jupiter-cloud {
+  color: #e8f9ff !important;
+}
+
+.text-jupiter-nebula-blue {
+  color: #00b6e7 !important;
+}
+
+.text-jupiter-helix-cyan {
+  color: #22ccee !important;
+}
+
+.text-jupiter-trifid-teal {
+  color: #2ed3b7 !important;
+}
+
+.text-jupiter-cosmic-lime {
+  color: #a4d756 !important;
+}
+
+.text-jupiter-aurora-green {
+  color: #76d484 !important;
+}
+
+.text-jupiter-steel {
+  color: #707070 !important;
+}
+
+.text-jupiter-space-black {
+  color: #0c0c0c !important;
+}
+
+/* Price animations */
+@keyframes priceUpdate {
+  0% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pricePulse {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.price-update {
+  animation: priceUpdate 0.5s ease-out;
+}
+
+.font-dosis {
+  font-family: var(--font-dosis);
+}
+
+.text-[#00ff41] {
+  color: #00ff41;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+.text-[#ff3b30] {
+  color: #ff3b30;
+  text-shadow: 0 0 8px rgba(255, 59, 48, 0.5);
+}
+
+.text-[#C7F284] {
+  color: #c7f284;
+  text-shadow: 0 0 8px rgba(199, 242, 132, 0.5);
+}
+
+/* Digital display styles */
+.digital-char {
+  display: inline-block;
+  margin: 0 2px;
+  position: relative;
+}
+
+.digital-digit {
+  position: relative;
+  width: 30px;
+  height: 50px;
+  margin: 0 2px;
+}
+
+.digital-dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  margin-top: 35px;
+}
+
+.segment {
+  position: absolute;
+  background-color: currentColor;
+}
+
+.segment.horizontal {
+  height: 4px;
+  width: 24px;
+  left: 3px;
+}
+
+.segment.vertical {
+  width: 4px;
+  height: 20px;
+}
+
+.segment.top {
+  top: 0;
+}
+
+.segment.middle {
+  top: 23px;
+}
+
+.segment.bottom {
+  bottom: 0;
+}
+
+.segment.top-left {
+  top: 2px;
+  left: 0;
+}
+
+.segment.top-right {
+  top: 2px;
+  right: 0;
+}
+
+.segment.bottom-left {
+  bottom: 2px;
+  left: 0;
+}
+
+.segment.bottom-right {
+  bottom: 2px;
+  right: 0;
+}
+
+/* Alternative digital display using a web font */
+.digital-price {
+  font-family: "LED Digital 7", monospace;
+  font-size: 3.5rem;
+  letter-spacing: 2px;
+}
+
+/* Pixelated font style */
+.pixelated-text {
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+}
